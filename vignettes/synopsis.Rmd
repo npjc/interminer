@@ -19,12 +19,11 @@ library(interminer)
 
 ```{r}
 df <- im("flymine") %>% 
-  im_regions("~/out.gff3", c("Exon","Intron"),"D. melanogaster") %>% 
+  im_regions("X\t10000\t20000\n", c("Exon","Intron"),"D. melanogaster") %>% 
   im_get_gff3()
 ```
 1. `im()` specifies which intermine data warehouse to query against
-2. `im_regions()` reads the gff3 file located at "~/out.gff3", formats the 
-intervals for intermine queries. Also specify to look for ("Exon" and "Intron") 
+2. `im_regions()` reads the interval data. It's a bed-type string here but could be a file path such as "~/my_file.gff3". This data is formatted for intermine queries. Also specify to look for ("Exon" and "Intron") 
 overlapping`feature_types` within the `organism` "D. melanogaster".
 3. `im_get_gff3()` sends the query request, collects the result and returns a 
 data.frame object (as gff3).
@@ -34,7 +33,7 @@ head(df)
 ```
 
 Alternatively, write the results to a file:
-
+- here `out.gf
 ```{r, eval= FALSE}
 im("flymine") %>% 
   im_regions("~/out.gff3", c("Exon","Intron"),"D. melanogaster") %>% 
@@ -49,3 +48,10 @@ im("flymine") %>%
 These 3 are limited to sequence feature types (i.e. the chosen query must return
 sequence feature objects). All other queries use the more general:
 - `im_get()`
+
+Also see what happens when no intersections
+```{r}
+im("flymine") %>% 
+  im_regions("X\t1\t20\n", c("Exon","Intron"),"D. melanogaster") %>% 
+  im_get_gff3()
+```

@@ -15,7 +15,12 @@ im_get <- function(im, as = "tab", path = NULL) {
   im <- parse_for_service(im, as)
 
   r <- httr::GET(im$url, path = im$service, query = im["query"], httr::accept("*/*"))
+  request_success <- httr::status_code(r) == 200
+  stopifnot(request_success)
 
+  if(!grepl("\t", httr::content(r, "text"), fixed=T)) {
+    return(httr::content(r,"text"))
+  }
   parse_results(r, as, path)
 }
 

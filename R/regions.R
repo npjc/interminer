@@ -26,10 +26,16 @@ im_regions <- function(im, name, features, organism, cse_cols = 1:3L) {
 #' @return returns a character vector of with each region of the form "c:s..e".
 #' @keywords internal
 parse_regions <- function(name, cse_cols = 1:3L) {
-
+  skip <- 0
   if (is.character(name)) {
-    if (stringi::stri_endswith_fixed(name,".gff3")) cse_cols <- c(1,4:5L)
-    df <- data.table::fread(name, select = cse_cols,skip="##")
+    if (stringi::stri_endswith_fixed(name,".gff3")) {
+      cse_cols <- c(1,4:5L)
+      skip <- "##"
+    }
+
+    if (stringi::stri_endswith_fixed(name,".bed")) skip <- "track"
+
+    df <- data.table::fread(name, select = cse_cols,skip=skip)
     data.table::setattr(df,"class","data.frame")
   }
   if (is.list(name)) {
