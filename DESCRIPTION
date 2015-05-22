@@ -10,6 +10,8 @@ Description: This package provides an R interface to InterMine biological data
     warehouses. Interminer is powered by InterMine's PathQuery API and users to
     easily access and query intermine data.
 License: MIT + file LICENSE
+BugReports: https://github.com/nicolascoutin/interminer/issues
+URL: https://github.com/nicolascoutin/interminer
 LazyData: TRUE
 Depends:
     R (>= 3.2.0)
