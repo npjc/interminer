@@ -1,0 +1,51 @@
+---
+title: "interminer: synopsis"
+author: "Nicolas Coutin"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+options(dplyr.print_min = 4L, dplyr.print_max = 4L)
+library(interminer)
+```
+
+### Take interval regions and query sequence features overlapping with it:
+
+```{r}
+df <- im("flymine") %>% 
+  im_regions("~/out.gff3", c("Exon","Intron"),"D. melanogaster") %>% 
+  im_get_gff3()
+```
+1. `im()` specifies which intermine data warehouse to query against
+2. `im_regions()` reads the gff3 file located at "~/out.gff3", formats the 
+intervals for intermine queries. Also specify to look for ("Exon" and "Intron") 
+overlapping`feature_types` within the `organism` "D. melanogaster".
+3. `im_get_gff3()` sends the query request, collects the result and returns a 
+data.frame object (as gff3).
+
+```{r}
+head(df)
+```
+
+Alternatively, write the results to a file:
+
+```{r, eval= FALSE}
+im("flymine") %>% 
+  im_regions("~/out.gff3", c("Exon","Intron"),"D. melanogaster") %>% 
+  im_get_gff3("introns-exons_overlapping_out.gff3")
+```
+
+`interminer` provides 4 results "getters":
+
+- `im_get_gff3()` returns .gff3
+- `im_get_fasta()` returns .fa
+- `im_get_bed()` returns .bed
+These 3 are limited to sequence feature types (i.e. the chosen query must return
+sequence feature objects). All other queries use the more general:
+- `im_get()`
