@@ -11,11 +11,8 @@
 #' @export
 im_get <- function(im, as = "tab", path) {
 
-  # if we are getting features overlapping regions
-  im[["service"]] <- stringi::stri_join(im[["service"]], as, sep="/")
-  im[["query"]][["organism"]] <- jsonlite::unbox(im$query$organism)
-  im[["query"]] <- jsonlite::toJSON(im[["query"]])
-  im
+
+  im <- parse_for_service(im, as)
 
   httr::GET(im$url, path = im$service, query = im["query"], httr::accept("*/*"))
 }
