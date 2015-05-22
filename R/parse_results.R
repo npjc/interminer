@@ -8,6 +8,7 @@ parse_results <- function(r, as, path) {
   if(!is.null(path)) {
     httr::content(r, "raw") %>%
       writeBin(path)
+    return(cat("wrote file to:",path))
   }
 
   # to parse
