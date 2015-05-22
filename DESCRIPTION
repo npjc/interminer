@@ -1,0 +1,23 @@
+Package: interminer
+Type: Package
+Title: Easily Query InterMine Data Warehouses in R
+Version: 0.0.0.9000
+Date: 2015-05-21
+Authors@R: c(
+    person("Nicolas", "Coutin", , "nicolas.coutin@gmail.com", c("aut", "cre"))
+    )
+Description: This package provides an R interface to InterMine biological data
+    warehouses. Interminer is powered by InterMine's PathQuery API and users to
+    easily access and query intermine data.
+License: MIT + file LICENSE
+LazyData: TRUE
+Depends:
+    R (>= 3.2.0)
+Imports:
+    httr (>= 0.6.1),
+    magrittr,
+    stringr (>= 1.0.0)
+Suggests:
+    testthat,
+    knitr
+VignetteBuilder: knitr
