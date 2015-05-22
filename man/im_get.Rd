@@ -7,13 +7,13 @@
 \alias{im_get_gff3}
 \title{GET query results}
 \usage{
-im_get(im, as = "tab", path)
+im_get(im, as = "tab", path = NULL)
 
-im_get_gff3(im, path)
+im_get_gff3(im, path = NULL)
 
-im_get_fasta(im, path)
+im_get_fasta(im, path = NULL)
 
-im_get_bed(im, path)
+im_get_bed(im, path = NULL)
 }
 \arguments{
 \item{im}{im object from \code{\link{im}}}
