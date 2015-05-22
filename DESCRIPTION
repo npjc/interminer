@@ -16,9 +16,10 @@ LazyData: TRUE
 Depends:
     R (>= 3.2.0)
 Imports:
+    data.table (>= 1.9.4),
     httr (>= 0.6.1),
     magrittr,
-    stringr (>= 1.0.0)
+    stringi (>= 0.4.0)
 Suggests:
     testthat,
     knitr
