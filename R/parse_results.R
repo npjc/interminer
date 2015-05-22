@@ -15,7 +15,10 @@ parse_results <- function(r, as, path) {
   switch(as,
          "gff3" = parse_gff3_results(r),
          "fasta" = parse_fasta_results(r),
-         "bed" = parse_bed_results(r))
+         "bed" = parse_bed_results(r),
+         "tab" = parse_tab_results(r),
+         "text" = httr::content(r,"text"),
+         "request" = r)
 }
 
 #' parse gff3 results into data.frame
@@ -53,3 +56,12 @@ parse_bed_results <- function(r) {
   out
 }
 
+#' parse general tabular results into data.frame
+#' @param r request object
+#' @keywords internal
+parse_tab_results <- function(r) {
+  out <- httr::content(r,"text") %>%
+    data.table::fread()
+  data.table::setattr(out,"class","data.frame")
+  out
+}

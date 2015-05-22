@@ -13,7 +13,7 @@ parse_for_service <- function(im, as) {
 #' @param im im object
 #' @keywords internal
 prep_service_regions <- function(im, as) {
-  if (as != "tab") {
+  if (as %in% c("gff3","bed","fasta")) {
     im[["service"]] <- stringi::stri_join(im$service, as, sep="/")
   }
   im[["query"]][["organism"]] <- jsonlite::unbox(im$query$organism)
