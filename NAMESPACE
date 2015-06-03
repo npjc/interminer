@@ -2,9 +2,11 @@
 
 export("%>%")
 export(im)
+export(im_constrain)
 export(im_get)
 export(im_get_bed)
 export(im_get_fasta)
 export(im_get_gff3)
+export(im_query)
 export(im_regions)
 importFrom(magrittr,"%>%")

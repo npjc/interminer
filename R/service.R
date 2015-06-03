@@ -25,7 +25,8 @@ prep_service_regions <- function(im, as) {
 #' @param im im object
 #' @keywords internal
 prep_service_query <- function(im, as) {
-  stop("not yet implemented")
+  im[["query"]] <- as.character(im$query)
+  im
 }
 
 #' parse im for list type query
